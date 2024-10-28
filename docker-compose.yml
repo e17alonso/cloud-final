@@ -6,7 +6,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@cloud-database-1.c522meyy6vki.us-east-2.rds.amazonaws.com:5432/postgres
+      DATABASE_URL: postgresql://postgres:postgres@cloud.cpaw4immyopw.us-east-1.rds.amazonaws.com:5432/postgres
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
       interval: 10s
