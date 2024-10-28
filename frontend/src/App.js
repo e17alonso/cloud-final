@@ -1,6 +1,8 @@
 // frontend/src/App.js
 import React, { useState, useEffect } from 'react';
 
+const API_BASE_URL = 'https://7q9i2pt7ih.execute-api.us-east-1.amazonaws.com/prod'; // Placeholder
+
 function App() {
   const [books, setBooks] = useState([]);
   const [newBook, setNewBook] = useState({ title: '', author: '' });
@@ -10,14 +12,14 @@ function App() {
   }, []);
 
   const fetchBooks = async () => {
-    const response = await fetch('http://localhost:5000/books');
+    const response = await fetch(`${API_BASE_URL}/books`);
     const data = await response.json();
     setBooks(data);
   };
 
   const addBook = async (e) => {
     e.preventDefault();
-    await fetch('http://localhost:5000/books', {
+    await fetch(`${API_BASE_URL}/books`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newBook),
@@ -27,7 +29,7 @@ function App() {
   };
 
   const updateBookStatus = async (id) => {
-    await fetch(`http://localhost:5000/books/${id}`, { method: 'PUT' });
+    await fetch(`${API_BASE_URL}/books/${id}`, { method: 'PUT' });
     fetchBooks();
   };
 
@@ -52,7 +54,7 @@ function App() {
       <ul>
         {books.map((book) => (
           <li key={book.id}>
-            {book.title} by {book.author} - 
+            {book.title} by {book.author} -{' '}
             <button onClick={() => updateBookStatus(book.id)}>
               {book.is_available ? 'Take' : 'Return'}
             </button>
