@@ -1,12 +1,18 @@
-FROM python:3.9
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
 
-RUN apt-get update && apt-get install -y curl
-
+# Set the working directory in the container
 WORKDIR /app
 
-COPY requirements.txt .
+# Copy the requirements file and install dependencies
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy the rest of your application code
 COPY . .
 
-CMD ["python", "-u", "app.py"]
+# Expose port 5000
+EXPOSE 5000
+
+# Command to run the app with Gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]

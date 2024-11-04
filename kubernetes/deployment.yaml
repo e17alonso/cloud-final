@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: library-backend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: library-backend
+  template:
+    metadata:
+      labels:
+        app: library-backend
+    spec:
+      containers:
+      - name: library-backend
+        image: e17alonso/library-backend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        env:
+        - name: DATABASE_URL
+          value: "postgresql://postgres:postgres@cloud.cpaw4immyopw.us-east-1.rds.amazonaws.com:5432/postgres"

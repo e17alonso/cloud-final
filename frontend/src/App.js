@@ -1,7 +1,7 @@
 // frontend/src/App.js
 import React, { useState, useEffect } from 'react';
 
-const API_BASE_URL = 'https://7q9i2pt7ih.execute-api.us-east-1.amazonaws.com/prod'; // Placeholder
+const API_BASE_URL = 'http://ad2782add17804fa49727d794054e7d9-135044842.us-east-1.elb.amazonaws.com'; // Placeholder
 
 function App() {
   const [books, setBooks] = useState([]);
